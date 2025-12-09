@@ -3,10 +3,10 @@ import pdfplumber
 from io import BytesIO
 import os
 import json
-import requests
 from dotenv import load_dotenv
 from zhipuai import ZhipuAI
 from flask_cors import CORS
+
 
 # ------------ 创建 Flask 应用 ------------
 app = Flask(__name__)
@@ -337,5 +337,6 @@ def match_resume():
 
 
 if __name__ == "__main__":
-    # debug=True 方便开发时自动重启
-    app.run(host="0.0.0.0", port=8000, debug=True)
+    # 阿里云 FC 要求 9000；本地：默认 8000
+    port = int(os.environ.get("PORT", "8000"))
+    app.run(host="0.0.0.0", port=port)
